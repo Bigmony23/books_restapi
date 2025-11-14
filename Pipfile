@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 drf-yasg = "*"
+dj-rest-auth = "*"
+django-allauth = "*"
+requests = "*"
 
 [dev-packages]
 

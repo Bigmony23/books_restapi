@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from .models import Book
 from .serializers import BookSerializer
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 
 
 # class BookListApi(generics.ListCreateAPIView):
@@ -42,10 +42,7 @@ class BookCreateApiView(APIView):
                   'books':data}
             return Response(data)
         else:
-            return Response({
-                "status": False,
-                "message": "serializer is not valid"
-            }, status=status.HTTP_400_BAD_REQUEST )
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST )
 
 
 
@@ -115,3 +112,11 @@ class BookCreateListApi(generics.ListCreateAPIView):
 class BookUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+#crud
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    #we can change queryset
+    def get_queryset(self):
+        pass
